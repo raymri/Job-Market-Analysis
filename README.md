@@ -274,9 +274,10 @@ It highlights the importance of continuous upskilling in technologies like Pytho
 
 Through this analysis, I’ve strengthened both my technical and analytical storytelling skills, combining Python, visualization, and market insight to extract meaningful takeaways for career planning.
 
+This project was inspired by **_Luke Barousse_**. I replicated key concepts extending my findings and analysis for India specific insights, trends and visualisation improvements.
+
 ## 👩‍💻 Author
 _Mrigashree Ray_  
 Data Analyst   
-📫 [LinkedIn](https://www.linkedin.com/in/your-linkedin)  
-🌐 [GitHub](https://github.com/your-username)
+[LinkedIn](https://www.linkedin.com/in/mrigashree-ray/)  
 
