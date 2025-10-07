@@ -12,11 +12,13 @@ With the rapid growth of data-driven decision-making across industries, the dema
 However, salary expectations and skill requirements vary widely depending on tools, experience, and company type.
 This project dives deep into those patterns, aiming to answer key questions such as:
 
-1. Which tools and technologies are most in-demand for Data Analyst roles?
-
-2. How do salaries fluctuate month-to-month?
-
-3. Which skills provide the best return on learning investment?
+1. What are the high demand jobs in Indian market?
+2. Which tools and technologies are most in-demand for Data Analyst roles?
+3. How do salaries fluctuate month-to-month?
+4. Which skills provide the best return on learning investment?
+5. Most hiring companies in India?
+6. Salary distribution of Data jobs in India
+   
 
 # Tools I Used
 
@@ -57,198 +59,91 @@ df['job_skills'] = df['job_skills'].apply(lambda x: ast.literal_eval(x) if pd.no
   Created additional columns for monthly trends and skill percentages.
 
 # Analysis
-Each Jupyter notebook for this project aimed at investigating specific aspects of the data job market. Here’s how I approached each question:
 
-## 1. What are the most demanded skills for the top 3 most popular data roles?
+## 1. What are the most demanded jobs in Indian market?
 
-To find the most demanded skills for the top 3 most popular data roles. I filtered out those positions by which ones were the most popular, and got the top 5 skills for these top 3 roles. This query highlights the most popular job titles and their top skills, showing which skills I should pay attention to depending on the role I'm targeting. 
-
-View my notebook with detailed steps here: [2_Skill_Demand](2_Skill_Demand.ipynb).
+We are finding the top 4 most demanded jobs. This query highlights that Data Engineer has highest number of job postings over the months.
 
 ### Visualize Data
 
-```python
-fig, ax = plt.subplots(len(job_titles), 1)
-
-
-for i, job_title in enumerate(job_titles):
-    df_plot = df_skills_perc[df_skills_perc['job_title_short'] == job_title].head(5)[::-1]
-    sns.barplot(data=df_plot, x='skill_percent', y='job_skills', ax=ax[i], hue='skill_count', palette='dark:b_r')
-
-plt.show()
-```
-
-### Results
-
-![Likelihood of Skills Requested in the US Job Postings](images/Likelihood_of_Skills_Requested_in_US_Job_Postings.png)
-
-*Bar graph visualizing the salary for the top 3 data roles and their top 5 skills associated with each.*
+<img width="580" height="453" alt="image" src="https://github.com/user-attachments/assets/c7152516-af0f-4f60-88bd-f20d5f6d9f5c" />
 
 ### Insights:
 
-- SQL is the most requested skill for Data Analysts and Data Scientists, with it in over half the job postings for both roles. For Data Engineers, Python is the most sought-after skill, appearing in 68% of job postings.
-- Data Engineers require more specialized technical skills (AWS, Azure, Spark) compared to Data Analysts and Data Scientists who are expected to be proficient in more general data management and analysis tools (Excel, Tableau).
-- Python is a versatile skill, highly demanded across all three roles, but most prominently for Data Scientists (72%) and Data Engineers (65%).
+- Data Engineer roles consistently dominate the Indian job market, maintaining the highest number of openings throughout the year.
+- Data Scientist demand fluctuates, peaking around Oct–Nov.
+- Data Analyst demand remains steady but moderate, gradually increasing toward mid and late year, suggesting stable opportunities for entry to mid-level professionals.
+- Senior Data Engineer roles have the lowest and most stable demand, reflecting limited openings at the senior level compared to entry or mid-level positions.
 
-## 2. How are in-demand skills trending for Data Analysts?
+## 2. Which tools and technologies are most in-demand for Data Analyst roles?
 
 To find how skills are trending in 2023 for Data Analysts, I filtered data analyst positions and grouped the skills by the month of the job postings. This got me the top 5 skills of data analysts by month, showing how popular skills were throughout 2023.
 
-View my notebook with detailed steps here: [3_Skills_Trend](3_Skills_Trend.ipynb).
-
 ### Visualize Data
 
-```python
-
-from matplotlib.ticker import PercentFormatter
-
-df_plot = df_DA_US_percent.iloc[:, :5]
-sns.lineplot(data=df_plot, dashes=False, legend='full', palette='tab10')
-
-plt.gca().yaxis.set_major_formatter(PercentFormatter(decimals=0))
-
-plt.show()
-
-```
-
-### Results
-
-![Trending Top Skills for Data Analysts in the US](images/Trending_Top_Skills_for_Data_Analysts_in_the_US.png)  
-*Bar graph visualizing the trending top skills for data analysts in the US in 2023.*
+<img width="623" height="472" alt="image" src="https://github.com/user-attachments/assets/bd15fba0-8c0b-47d6-a566-34fa8f278539" />
 
 ### Insights:
-- SQL remains the most consistently demanded skill throughout the year, although it shows a gradual decrease in demand.
-- Excel experienced a significant increase in demand starting around September, surpassing both Python and Tableau by the end of the year.
-- Both Python and Tableau show relatively stable demand throughout the year with some fluctuations but remain essential skills for data analysts. Power BI, while less demanded compared to the others, shows a slight upward trend towards the year's end.
+- SQL remains the most consistently demanded skill for majorly all Data roles.
+- Tableau and Power BI also appear frequently, highlighting the need for strong visualization skills.
+- Overall, recruiters prefer candidates skilled in data querying + analysis + visualization tools. 
 
-## 3. How well do jobs and skills pay for Data Analysts?
+## 3. How do salaries fluctuate month-to-month for Data Analysts?
 
-To identify the highest-paying roles and skills, I only got jobs in the United States and looked at their median salary. But first I looked at the salary distributions of common data jobs like Data Scientist, Data Engineer, and Data Analyst, to get an idea of which jobs are paid the most. 
-
-View my notebook with detailed steps here: [4_Salary_Analysis](4_Salary_Analysis.ipynb).
+To identify the salary trend over the months of 2023, I only filtered jobs for Data analysts in India and looked at their median salary. 
 
 #### Visualize Data 
 
-```python
-sns.boxplot(data=df_US_top6, x='salary_year_avg', y='job_title_short', order=job_order)
-
-ticks_x = plt.FuncFormatter(lambda y, pos: f'${int(y/1000)}K')
-plt.gca().xaxis.set_major_formatter(ticks_x)
-plt.show()
-
-```
-
-#### Results
-
-![Salary Distributions of Data Jobs in the US](images/Salary_Distributions_of_Data_Jobs_in_the_US.png)  
-*Box plot visualizing the salary distributions for the top 6 data job titles.*
+<img width="784" height="384" alt="image" src="https://github.com/user-attachments/assets/eb9178af-24dc-4372-93d8-089f7bbe4cef" />
 
 #### Insights
 
-- There's a significant variation in salary ranges across different job titles. Senior Data Scientist positions tend to have the highest salary potential, with up to $600K, indicating the high value placed on advanced data skills and experience in the industry.
+- Average salary peaks sharply in February, indicating possible early-year hiring spikes or bonuses.
+- Salaries stabilize from March onward, staying between ₹75K–₹110K for most months.
+- The median salary closely follows the average, suggesting a balanced distribution without extreme outliers after February.There's a significant variation in salary ranges across different job titles. 
 
-- Senior Data Engineer and Senior Data Scientist roles show a considerable number of outliers on the higher end of the salary spectrum, suggesting that exceptional skills or circumstances can lead to high pay in these roles. In contrast, Data Analyst roles demonstrate more consistency in salary, with fewer outliers.
-
-- The median salaries increase with the seniority and specialization of the roles. Senior roles (Senior Data Scientist, Senior Data Engineer) not only have higher median salaries but also larger differences in typical salaries, reflecting greater variance in compensation as responsibilities increase.
-
-### Highest Paid & Most Demanded Skills for Data Analysts
-
-Next, I narrowed my analysis and focused only on data analyst roles. I looked at the highest-paid skills and the most in-demand skills. I used two bar charts to showcase these.
-
-#### Visualize Data
-
-```python
-
-fig, ax = plt.subplots(2, 1)  
-
-# Top 10 Highest Paid Skills for Data Analysts
-sns.barplot(data=df_DA_top_pay, x='median', y=df_DA_top_pay.index, hue='median', ax=ax[0], palette='dark:b_r')
-
-# Top 10 Most In-Demand Skills for Data Analystsr')
-sns.barplot(data=df_DA_skills, x='median', y=df_DA_skills.index, hue='median', ax=ax[1], palette='light:b')
-
-plt.show()
-
-```
-
-#### Results
-Here's the breakdown of the highest-paid & most in-demand skills for data analysts in the US:
-
-![The Highest Paid & Most In-Demand Skills for Data Analysts in the US](images/Highest_Paid_and_Most_In_Demand_Skills_for_Data_Analysts_in_the_US.png)
-*Two separate bar graphs visualizing the highest paid skills and most in-demand skills for data analysts in the US.*
-
-#### Insights:
-
-- The top graph shows specialized technical skills like `dplyr`, `Bitbucket`, and `Gitlab` are associated with higher salaries, some reaching up to $200K, suggesting that advanced technical proficiency can increase earning potential.
-
-- The bottom graph highlights that foundational skills like `Excel`, `PowerPoint`, and `SQL` are the most in-demand, even though they may not offer the highest salaries. This demonstrates the importance of these core skills for employability in data analysis roles.
-
-- There's a clear distinction between the skills that are highest paid and those that are most in-demand. Data analysts aiming to maximize their career potential should consider developing a diverse skill set that includes both high-paying specialized skills and widely demanded foundational skills.
-
-## 4. What are the most optimal skills to learn for Data Analysts?
-
+### 4.Which skills provide the best return on learning investment?
 To identify the most optimal skills to learn ( the ones that are the highest paid and highest in demand) I calculated the percent of skill demand and the median salary of these skills. To easily identify which are the most optimal skills to learn. 
 
-View my notebook with detailed steps here: [5_Optimal_Skills](5_Optimal_Skills.ipynb).
-
 #### Visualize Data
-
-```python
-from adjustText import adjust_text
-import matplotlib.pyplot as plt
-
-plt.scatter(df_DA_skills_high_demand['skill_percent'], df_DA_skills_high_demand['median_salary'])
-plt.show()
-
-```
-
-#### Results
-
-![Most Optimal Skills for Data Analysts in the US](images/Most_Optimal_Skills_for_Data_Analysts_in_the_US.png)    
-*A scatter plot visualizing the most optimal skills (high paying & high demand) for data analysts in the US.*
+<img width="975" height="580" alt="image" src="https://github.com/user-attachments/assets/acb6f019-e56b-4050-a806-e0a8c92ae738" />
 
 #### Insights:
 
-- The skill `Oracle` appears to have the highest median salary of nearly $97K, despite being less common in job postings. This suggests a high value placed on specialized database skills within the data analyst profession.
+- MongoDB offers the highest median salary (~₹165K) despite low demand, showing high value for niche expertise.
+- Power BI and Tableau balance strong demand with good pay, making them top picks for Data Analysts.
+- SQL, Python, and Excel are widely required, offering steady job opportunities even with moderate pay levels.
+- Tools like Azure and Spark also provide solid returns with growing relevance in cloud and big data fields.
+  
+### 5. Most hiring companies in India?
 
-- More commonly required skills like `Excel` and `SQL` have a large presence in job listings but lower median salaries compared to specialized skills like `Python` and `Tableau`, which not only have higher salaries but are also moderately prevalent in job listings.
-
-- Skills such as `Python`, `Tableau`, and `SQL Server` are towards the higher end of the salary spectrum while also being fairly common in job listings, indicating that proficiency in these tools can lead to good opportunities in data analytics.
-
-### Visualizing Different Techonologies
-
-Let's visualize the different technologies as well in the graph. We'll add color labels based on the technology (e.g., {Programming: Python})
+Let's visualize the most hiring companies. We narrowed down our search to top 20.
 
 #### Visualize Data
 
-```python
-from matplotlib.ticker import PercentFormatter
-
-# Create a scatter plot
-scatter = sns.scatterplot(
-    data=df_DA_skills_tech_high_demand,
-    x='skill_percent',
-    y='median_salary',
-    hue='technology',  # Color by technology
-    palette='bright',  # Use a bright palette for distinct colors
-    legend='full'  # Ensure the legend is shown
-)
-plt.show()
-
-```
-
-#### Results
-
-![Most Optimal Skills for Data Analysts in the US with Coloring by Technology](images/Most_Optimal_Skills_for_Data_Analysts_in_the_US_with_Coloring_by_Technology.png)  
-*A scatter plot visualizing the most optimal skills (high paying & high demand) for data analysts in the US with color labels for technology.*
+<img width="781" height="457" alt="image" src="https://github.com/user-attachments/assets/2390ba75-bdb7-45c6-85b4-7406b30045b9" />
 
 #### Insights:
 
-- The scatter plot shows that most of the `programming` skills (colored blue) tend to cluster at higher salary levels compared to other categories, indicating that programming expertise might offer greater salary benefits within the data analytics field.
+- IBM, Visa, and PepsiCo are among the leading recruiters for data roles in India.
+- Firms like LTIMindtree, Wells Fargo, and S&P Global also show strong hiring activity.
+- The mix of tech, consulting, and finance companies highlights wide demand for data professionals across industries.
 
-- The database skills (colored orange), such as Oracle and SQL Server, are associated with some of the highest salaries among data analyst tools. This indicates a significant demand and valuation for data management and manipulation expertise in the industry.
 
-- Analyst tools (colored green), including Tableau and Power BI, are prevalent in job postings and offer competitive salaries, showing that visualization and data analysis software are crucial for current data roles. This category not only has good salaries but is also versatile across different types of data tasks.
+### 6. Salary distribution of Data jobs in India    
+
+Let's now look at our last finding. Salary distribution amongst various Data roles.
+
+#### Visualize Data
+
+<img width="737" height="457" alt="image" src="https://github.com/user-attachments/assets/d8159a36-bec6-48fc-a524-c4eb5d9fa5f1" />
+
+#### Insights:
+
+- Data Engineers and Machine Learning Engineers earn the highest median salaries.
+- Data Analysts earn comparatively less but with less salary variation, indicating more consistency.
+- Senior Data Engineers and Data Scientists show wide pay ranges, reflecting variation by experience and company.
+
 
 # What I Learned
 
@@ -259,14 +154,6 @@ Throughout this project, I deepened my understanding of the data analyst job mar
 - **Strategic Skill Analysis**: The project emphasized the importance of aligning one's skills with market demand. Understanding the relationship between skill demand, salary, and job availability allows for more strategic career planning in the tech industry.
 
 
-# Insights
-
-This project provided several general insights into the data job market for analysts:
-
-- **Skill Demand and Salary Correlation**: There is a clear correlation between the demand for specific skills and the salaries these skills command. Advanced and specialized skills like Python and Oracle often lead to higher salaries.
-- **Market Trends**: There are changing trends in skill demand, highlighting the dynamic nature of the data job market. Keeping up with these trends is essential for career growth in data analytics.
-- **Economic Value of Skills**: Understanding which skills are both in-demand and well-compensated can guide data analysts in prioritizing learning to maximize their economic returns.
-
 # Conclusion
 
 This project provides a clear view of how skillsets impact salary and job opportunities for Data Analysts in India.
@@ -274,7 +161,7 @@ It highlights the importance of continuous upskilling in technologies like Pytho
 
 Through this analysis, I’ve strengthened both my technical and analytical storytelling skills, combining Python, visualization, and market insight to extract meaningful takeaways for career planning.
 
-This project was inspired by **_Luke Barousse_**. I replicated key concepts extending my findings and analysis for India specific insights, trends and visualisation improvements.
+This project was inspired by **_Luke Barousse_**. 
 
 ## 👩‍💻 Author
 _Mrigashree Ray_  
